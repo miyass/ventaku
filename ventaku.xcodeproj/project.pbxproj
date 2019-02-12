@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		F1BC4C7D221281F5007BEE00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */; };
-		F1BC4C7F221281F5007BEE00 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7E221281F5007BEE00 /* ViewController.swift */; };
-		F1BC4C82221281F5007BEE00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C80221281F5007BEE00 /* Main.storyboard */; };
+		F1BC4C7F221281F5007BEE00 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */; };
+		F1BC4C82221281F5007BEE00 /* Calculator .storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C80221281F5007BEE00 /* Calculator .storyboard */; };
 		F1BC4C84221281F7007BEE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C83221281F7007BEE00 /* Assets.xcassets */; };
 		F1BC4C87221281F7007BEE00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C85221281F7007BEE00 /* LaunchScreen.storyboard */; };
 		F1BC4C92221281F7007BEE00 /* ventakuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C91221281F7007BEE00 /* ventakuTests.swift */; };
 		F1BC4C9D221281F7007BEE00 /* ventakuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C9C221281F7007BEE00 /* ventakuUITests.swift */; };
+		F1BC4CB3221285C1007BEE00 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CAD221285C1007BEE00 /* RobotoCondensed-Bold.ttf */; };
+		F1BC4CB4221285C1007BEE00 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CAE221285C1007BEE00 /* RobotoCondensed-Light.ttf */; };
+		F1BC4CB5221285C1007BEE00 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CAF221285C1007BEE00 /* RobotoCondensed-Italic.ttf */; };
+		F1BC4CB6221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB0221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf */; };
+		F1BC4CB7221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB1221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf */; };
+		F1BC4CB8221285C1007BEE00 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB2221285C1007BEE00 /* RobotoCondensed-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +42,8 @@
 /* Begin PBXFileReference section */
 		F1BC4C79221281F5007BEE00 /* ventaku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ventaku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F1BC4C7E221281F5007BEE00 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F1BC4C81221281F5007BEE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		F1BC4C81221281F5007BEE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Calculator .storyboard"; sourceTree = "<group>"; };
 		F1BC4C83221281F7007BEE00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1BC4C86221281F7007BEE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1BC4C88221281F7007BEE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +53,12 @@
 		F1BC4C98221281F7007BEE00 /* ventakuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ventakuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BC4C9C221281F7007BEE00 /* ventakuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ventakuUITests.swift; sourceTree = "<group>"; };
 		F1BC4C9E221281F7007BEE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1BC4CAD221285C1007BEE00 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
+		F1BC4CAE221285C1007BEE00 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
+		F1BC4CAF221285C1007BEE00 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
+		F1BC4CB0221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
+		F1BC4CB1221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
+		F1BC4CB2221285C1007BEE00 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +109,9 @@
 		F1BC4C7B221281F5007BEE00 /* ventaku */ = {
 			isa = PBXGroup;
 			children = (
+				F1BC4CAB221285AC007BEE00 /* Fonts */,
+				F1BC4CAA22128235007BEE00 /* Calculator  */,
 				F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */,
-				F1BC4C7E221281F5007BEE00 /* ViewController.swift */,
-				F1BC4C80221281F5007BEE00 /* Main.storyboard */,
 				F1BC4C83221281F7007BEE00 /* Assets.xcassets */,
 				F1BC4C85221281F7007BEE00 /* LaunchScreen.storyboard */,
 				F1BC4C88221281F7007BEE00 /* Info.plist */,
@@ -123,6 +135,36 @@
 				F1BC4C9E221281F7007BEE00 /* Info.plist */,
 			);
 			path = ventakuUITests;
+			sourceTree = "<group>";
+		};
+		F1BC4CAA22128235007BEE00 /* Calculator  */ = {
+			isa = PBXGroup;
+			children = (
+				F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */,
+				F1BC4C80221281F5007BEE00 /* Calculator .storyboard */,
+			);
+			path = "Calculator ";
+			sourceTree = "<group>";
+		};
+		F1BC4CAB221285AC007BEE00 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F1BC4CAC221285C1007BEE00 /* Roboto_Condensed */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F1BC4CAC221285C1007BEE00 /* Roboto_Condensed */ = {
+			isa = PBXGroup;
+			children = (
+				F1BC4CAD221285C1007BEE00 /* RobotoCondensed-Bold.ttf */,
+				F1BC4CAE221285C1007BEE00 /* RobotoCondensed-Light.ttf */,
+				F1BC4CAF221285C1007BEE00 /* RobotoCondensed-Italic.ttf */,
+				F1BC4CB0221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf */,
+				F1BC4CB1221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf */,
+				F1BC4CB2221285C1007BEE00 /* RobotoCondensed-Regular.ttf */,
+			);
+			path = Roboto_Condensed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,9 +271,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1BC4CB6221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				F1BC4C87221281F7007BEE00 /* LaunchScreen.storyboard in Resources */,
 				F1BC4C84221281F7007BEE00 /* Assets.xcassets in Resources */,
-				F1BC4C82221281F5007BEE00 /* Main.storyboard in Resources */,
+				F1BC4CB3221285C1007BEE00 /* RobotoCondensed-Bold.ttf in Resources */,
+				F1BC4C82221281F5007BEE00 /* Calculator .storyboard in Resources */,
+				F1BC4CB4221285C1007BEE00 /* RobotoCondensed-Light.ttf in Resources */,
+				F1BC4CB8221285C1007BEE00 /* RobotoCondensed-Regular.ttf in Resources */,
+				F1BC4CB7221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf in Resources */,
+				F1BC4CB5221285C1007BEE00 /* RobotoCondensed-Italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1BC4C7F221281F5007BEE00 /* ViewController.swift in Sources */,
+				F1BC4C7F221281F5007BEE00 /* CalculatorViewController.swift in Sources */,
 				F1BC4C7D221281F5007BEE00 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,12 +341,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F1BC4C80221281F5007BEE00 /* Main.storyboard */ = {
+		F1BC4C80221281F5007BEE00 /* Calculator .storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F1BC4C81221281F5007BEE00 /* Base */,
 			);
-			name = Main.storyboard;
+			name = "Calculator .storyboard";
 			sourceTree = "<group>";
 		};
 		F1BC4C85221281F7007BEE00 /* LaunchScreen.storyboard */ = {
