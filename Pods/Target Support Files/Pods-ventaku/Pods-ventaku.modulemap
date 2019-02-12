@@ -1,0 +1,6 @@
+framework module Pods_ventaku {
+  umbrella header "Pods-ventaku-umbrella.h"
+
+  export *
+  module * { export * }
+}

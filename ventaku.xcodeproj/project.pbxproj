@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E3FCFBCE0FB2E8C6B754BB8 /* Pods_ventaku.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE7121C84F38064A750A9A4F /* Pods_ventaku.framework */; };
+		92C62E8986090D02D965096B /* Pods_ventakuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1ED8653118D603A784A0EEE /* Pods_ventakuUITests.framework */; };
 		F1BC4C7D221281F5007BEE00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */; };
 		F1BC4C7F221281F5007BEE00 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */; };
-		F1BC4C82221281F5007BEE00 /* Calculator .storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C80221281F5007BEE00 /* Calculator .storyboard */; };
+		F1BC4C82221281F5007BEE00 /* Calculator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C80221281F5007BEE00 /* Calculator.storyboard */; };
 		F1BC4C84221281F7007BEE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C83221281F7007BEE00 /* Assets.xcassets */; };
 		F1BC4C87221281F7007BEE00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C85221281F7007BEE00 /* LaunchScreen.storyboard */; };
 		F1BC4C92221281F7007BEE00 /* ventakuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C91221281F7007BEE00 /* ventakuTests.swift */; };
@@ -20,6 +22,7 @@
 		F1BC4CB6221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB0221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf */; };
 		F1BC4CB7221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB1221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf */; };
 		F1BC4CB8221285C1007BEE00 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB2221285C1007BEE00 /* RobotoCondensed-Regular.ttf */; };
+		FED78050716852DB84DF6267 /* Pods_ventakuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB494BF90B9E4F54D4E3D0F /* Pods_ventakuTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +43,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DA74AEF99CA7367E2EFDCE4 /* Pods-ventakuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventakuUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ventakuUITests/Pods-ventakuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		215017C38A1FFCE2491D3065 /* Pods-ventakuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventakuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ventakuTests/Pods-ventakuTests.release.xcconfig"; sourceTree = "<group>"; };
+		3BB494BF90B9E4F54D4E3D0F /* Pods_ventakuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ventakuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42259C2C579B229390451079 /* Pods-ventaku.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventaku.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ventaku/Pods-ventaku.debug.xcconfig"; sourceTree = "<group>"; };
+		9D31188AAC3B08B4FBFC5C35 /* Pods-ventaku.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventaku.release.xcconfig"; path = "Pods/Target Support Files/Pods-ventaku/Pods-ventaku.release.xcconfig"; sourceTree = "<group>"; };
+		A6D02A2158C56F48456240E1 /* Pods-ventakuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventakuUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ventakuUITests/Pods-ventakuUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D1ED8653118D603A784A0EEE /* Pods_ventakuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ventakuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D78F1C2D43706E948F22FB9C /* Pods-ventakuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventakuTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ventakuTests/Pods-ventakuTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DE7121C84F38064A750A9A4F /* Pods_ventaku.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ventaku.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BC4C79221281F5007BEE00 /* ventaku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ventaku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
-		F1BC4C81221281F5007BEE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Calculator .storyboard"; sourceTree = "<group>"; };
+		F1BC4C81221281F5007BEE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Calculator.storyboard; sourceTree = "<group>"; };
 		F1BC4C83221281F7007BEE00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1BC4C86221281F7007BEE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1BC4C88221281F7007BEE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E3FCFBCE0FB2E8C6B754BB8 /* Pods_ventaku.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED78050716852DB84DF6267 /* Pods_ventakuTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,12 +94,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C62E8986090D02D965096B /* Pods_ventakuUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BF89F016B748DBDF817E044 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE7121C84F38064A750A9A4F /* Pods_ventaku.framework */,
+				3BB494BF90B9E4F54D4E3D0F /* Pods_ventakuTests.framework */,
+				D1ED8653118D603A784A0EEE /* Pods_ventakuUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4728B733A1858ED33DC475D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42259C2C579B229390451079 /* Pods-ventaku.debug.xcconfig */,
+				9D31188AAC3B08B4FBFC5C35 /* Pods-ventaku.release.xcconfig */,
+				D78F1C2D43706E948F22FB9C /* Pods-ventakuTests.debug.xcconfig */,
+				215017C38A1FFCE2491D3065 /* Pods-ventakuTests.release.xcconfig */,
+				A6D02A2158C56F48456240E1 /* Pods-ventakuUITests.debug.xcconfig */,
+				1DA74AEF99CA7367E2EFDCE4 /* Pods-ventakuUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F1BC4C70221281F5007BEE00 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +131,8 @@
 				F1BC4C90221281F7007BEE00 /* ventakuTests */,
 				F1BC4C9B221281F7007BEE00 /* ventakuUITests */,
 				F1BC4C7A221281F5007BEE00 /* Products */,
+				4728B733A1858ED33DC475D9 /* Pods */,
+				1BF89F016B748DBDF817E044 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */,
-				F1BC4C80221281F5007BEE00 /* Calculator .storyboard */,
+				F1BC4C80221281F5007BEE00 /* Calculator.storyboard */,
 			);
 			path = "Calculator ";
 			sourceTree = "<group>";
@@ -174,9 +214,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1BC4CA1221281F7007BEE00 /* Build configuration list for PBXNativeTarget "ventaku" */;
 			buildPhases = (
+				581E8AF015286FAD2C703D59 /* [CP] Check Pods Manifest.lock */,
 				F1BC4C75221281F5007BEE00 /* Sources */,
 				F1BC4C76221281F5007BEE00 /* Frameworks */,
 				F1BC4C77221281F5007BEE00 /* Resources */,
+				3738C5B2F4A8D3659E96E0F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,6 +233,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1BC4CA4221281F7007BEE00 /* Build configuration list for PBXNativeTarget "ventakuTests" */;
 			buildPhases = (
+				63CCD45D3DE79A32F5F6885E /* [CP] Check Pods Manifest.lock */,
 				F1BC4C89221281F7007BEE00 /* Sources */,
 				F1BC4C8A221281F7007BEE00 /* Frameworks */,
 				F1BC4C8B221281F7007BEE00 /* Resources */,
@@ -209,6 +252,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1BC4CA7221281F7007BEE00 /* Build configuration list for PBXNativeTarget "ventakuUITests" */;
 			buildPhases = (
+				4DCA693EEA453707FBDB80F7 /* [CP] Check Pods Manifest.lock */,
 				F1BC4C94221281F7007BEE00 /* Sources */,
 				F1BC4C95221281F7007BEE00 /* Frameworks */,
 				F1BC4C96221281F7007BEE00 /* Resources */,
@@ -275,7 +319,7 @@
 				F1BC4C87221281F7007BEE00 /* LaunchScreen.storyboard in Resources */,
 				F1BC4C84221281F7007BEE00 /* Assets.xcassets in Resources */,
 				F1BC4CB3221285C1007BEE00 /* RobotoCondensed-Bold.ttf in Resources */,
-				F1BC4C82221281F5007BEE00 /* Calculator .storyboard in Resources */,
+				F1BC4C82221281F5007BEE00 /* Calculator.storyboard in Resources */,
 				F1BC4CB4221285C1007BEE00 /* RobotoCondensed-Light.ttf in Resources */,
 				F1BC4CB8221285C1007BEE00 /* RobotoCondensed-Regular.ttf in Resources */,
 				F1BC4CB7221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf in Resources */,
@@ -298,6 +342,101 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3738C5B2F4A8D3659E96E0F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ventaku/Pods-ventaku-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ventaku/Pods-ventaku-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DCA693EEA453707FBDB80F7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ventakuUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		581E8AF015286FAD2C703D59 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ventaku-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63CCD45D3DE79A32F5F6885E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ventakuTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F1BC4C75221281F5007BEE00 /* Sources */ = {
@@ -341,12 +480,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F1BC4C80221281F5007BEE00 /* Calculator .storyboard */ = {
+		F1BC4C80221281F5007BEE00 /* Calculator.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F1BC4C81221281F5007BEE00 /* Base */,
 			);
-			name = "Calculator .storyboard";
+			name = Calculator.storyboard;
 			sourceTree = "<group>";
 		};
 		F1BC4C85221281F7007BEE00 /* LaunchScreen.storyboard */ = {
@@ -478,6 +617,7 @@
 		};
 		F1BC4CA2221281F7007BEE00 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42259C2C579B229390451079 /* Pods-ventaku.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -496,6 +636,7 @@
 		};
 		F1BC4CA3221281F7007BEE00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D31188AAC3B08B4FBFC5C35 /* Pods-ventaku.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -514,6 +655,7 @@
 		};
 		F1BC4CA5221281F7007BEE00 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D78F1C2D43706E948F22FB9C /* Pods-ventakuTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -535,6 +677,7 @@
 		};
 		F1BC4CA6221281F7007BEE00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 215017C38A1FFCE2491D3065 /* Pods-ventakuTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -556,6 +699,7 @@
 		};
 		F1BC4CA8221281F7007BEE00 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6D02A2158C56F48456240E1 /* Pods-ventakuUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -576,6 +720,7 @@
 		};
 		F1BC4CA9221281F7007BEE00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DA74AEF99CA7367E2EFDCE4 /* Pods-ventakuUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
