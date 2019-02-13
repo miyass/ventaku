@@ -28,8 +28,9 @@ extension CalculatorViewController {
     private func designSetUp() {
         createNumberButton()
         createCalculationButton()
-        
         createCalculationResultArea()
+        createFunctionalButton()
+        createEraceButton()
     }
     //数字ボタン
     private func createNumberButton() {
@@ -78,6 +79,28 @@ extension CalculatorViewController {
         configureFormulaTextPosition(formulaText: formulaText, calculationResultArea: calculationResultArea)
         congifureFormulaTextDesign(formulaText: formulaText)
     }
+    //各種機能ボタン
+    private func createFunctionalButton() {
+        var functionalButtonCount = 0
+        while functionalButtonCount <= 2 {
+            let functionalButton = UIButton(type: .custom)
+            view.addSubview(functionalButton)
+            configureFunctionalButtonPosition(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
+            configureFunctionalButtonDesign(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
+            functionalButtonCount += 1
+        }
+    }
+    //削除、戻るボタン
+    private func createEraceButton() {
+        var eraceButtonCount = 0
+        while eraceButtonCount <= 1 {
+            let eraceButton = UIButton(type: .custom)
+            view.addSubview(eraceButton)
+            configureEraceButtonPosition(eraceButton: eraceButton, eraceButtonCount: eraceButtonCount)
+            configureEraceButtonDesign(eraceButton: eraceButton, eraceButtonCount: eraceButtonCount)
+            eraceButtonCount += 1
+        }
+    }
     
 }
 
@@ -101,8 +124,6 @@ extension CalculatorViewController {
         calculationButton.layer.borderWidth = 1
         calculationButton.layer.borderColor = UIColor.gray.cgColor
     }
-    
-    
     
     private func configureNumberDesignPosition(numberButton: UIButton, number: Int) {
         var numberWidthSort: CGFloat = 0.0
@@ -167,10 +188,48 @@ extension CalculatorViewController {
     }
     
     private func congifureFormulaTextDesign(formulaText: UILabel) {
-        formulaText.text = "999,999,999,999"
+        formulaText.text = "( 3 + 30 - 10) * 10 / 3"
         formulaText.textAlignment = .right
         formulaText.textColor = UIColor.gray
         formulaText.font = UIFont(name: "RobotoCondensed-Bold", size: 16)
 //        formulaText.backgroundColor = UIColor.green
+    }
+    
+    private func configureFunctionalButtonPosition(functionalButton: UIButton, functionalButtonCount: Int) {
+        functionalButton.snp.makeConstraints { (make) in
+            make.width.equalTo(view.bounds.width / 4)
+            make.height.equalTo(view.bounds.width / 4)
+            make.bottom.equalTo(view.bounds.width / 4 * -4)
+            make.left.equalTo(view.bounds.width / 4 * CGFloat(functionalButtonCount))
+        }
+    }
+    
+    private func configureFunctionalButtonDesign(functionalButton: UIButton, functionalButtonCount: Int) {
+        let functionalSymbolImage = [ "+/-", "(", ")" ]
+        functionalButton.setTitle(functionalSymbolImage[functionalButtonCount], for: .normal)
+        functionalButton.setTitleColor(UIColor.black, for: .normal)
+        functionalButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
+        functionalButton.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
+        functionalButton.layer.borderWidth = 1
+        functionalButton.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    private func configureEraceButtonPosition(eraceButton: UIButton, eraceButtonCount: Int) {
+        eraceButton.snp.makeConstraints { (make) in
+            make.width.equalTo(view.bounds.width / 4)
+            make.height.equalTo(view.bounds.width / 4)
+            make.bottom.equalTo(view)
+            make.left.equalTo(view.bounds.width / 4 * CGFloat(eraceButtonCount + 1))
+        }
+    }
+    
+    private func configureEraceButtonDesign(eraceButton: UIButton, eraceButtonCount: Int) {
+        let eraceSymbolImage = ["C", "<"]
+        eraceButton.setTitle(eraceSymbolImage[eraceButtonCount], for: .normal)
+        eraceButton.setTitleColor(UIColor.black, for: .normal)
+        eraceButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
+        eraceButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        eraceButton.layer.borderWidth = 1
+        eraceButton.layer.borderColor = UIColor.gray.cgColor
     }
 }
