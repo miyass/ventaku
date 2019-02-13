@@ -18,11 +18,11 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
-
+//For design
 extension CalculatorViewController {
     private func designSetUp() {
         createNumberButton()
-        createCalculateButton()
+        createCalculationButton()
     }
     
     private func createNumberButton() {
@@ -36,9 +36,39 @@ extension CalculatorViewController {
         }
     }
     
-    private func createCalculateButton() {
-        
+    private func createCalculationButton() {
+        var calculateCount = 0
+        while calculateCount <= 4 {
+            let calculationButton = UIButton(type: .custom)
+            view.addSubview(calculationButton)
+            configureCalculationDesignPosition(calculationButton: calculationButton, calculateCount: calculateCount)
+            configureEachCalculationButtonDesign(calculationButton: calculationButton, calculateCount: calculateCount)
+            calculateCount += 1
+        }
     }
+}
+
+// design detail
+extension CalculatorViewController {
+    private func configureCalculationDesignPosition(calculationButton: UIButton, calculateCount: Int) {
+        calculationButton.snp.makeConstraints{(make) in
+            make.width.equalTo(view.bounds.width / 4)
+            make.height.equalTo(view.bounds.width / 4)
+            make.bottom.equalTo(view).offset(view.bounds.width / 4 * CGFloat(-calculateCount))
+            make.right.equalTo(view)
+        }
+    }
+    
+    private func configureEachCalculationButtonDesign(calculationButton: UIButton, calculateCount: Int) {
+        let calculationSymbolImage = [ "=", "+", "-", "×", "÷" ]
+        calculationButton.setTitle(calculationSymbolImage[calculateCount], for: .normal)
+        calculationButton.setTitleColor(UIColor.black, for: .normal)
+        calculationButton.backgroundColor = UIColor.init(red: 26 / 252, green: 161 / 252, blue: 112 / 252, alpha: 252 / 252)
+        calculationButton.layer.borderWidth = 1
+        calculationButton.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    
     
     private func configureNumberDesignPosition(numberButton: UIButton, number: Int) {
         var numberWidthSort: CGFloat = 0.0
@@ -69,8 +99,8 @@ extension CalculatorViewController {
     
     private func configureEachNumberButtonDesign(numberButton: UIButton, number: Int) {
         numberButton.setTitle(String(number), for: .normal)
+        numberButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 30)
         numberButton.setTitleColor(UIColor.black, for: .normal)
-        numberButton.titleLabel!.font = UIFont(name: "RobotoCondensed-Bold", size: 90)
         numberButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
         numberButton.layer.borderWidth = 1
         numberButton.layer.borderColor = UIColor.gray.cgColor
