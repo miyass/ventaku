@@ -14,7 +14,7 @@ final class CalculatorViewController: UIViewController, UITextFieldDelegate {
     private var presenter:CalculatorPresenter!
     
     private let calculationResultTextField = UITextField()
-    private let formulaText = UILabel()
+    private let formulaTextLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,11 @@ extension CalculatorViewController {
         while calculateCount <= 4 {
             let calculationButton = UIButton(type: .custom)
             view.addSubview(calculationButton)
+            if calculateCount == 0 {
+                calculationButton.addTarget(self, action: #selector(tapResultButton), for: .touchUpInside)
+            } else {
+                calculationButton.addTarget(self, action: #selector(tapCalculationButton), for: .touchUpInside)
+            }
             configureCalculationDesignPosition(calculationButton: calculationButton, calculateCount: calculateCount)
             configureEachCalculationButtonDesign(calculationButton: calculationButton, calculateCount: calculateCount)
             calculateCount += 1
@@ -79,9 +84,9 @@ extension CalculatorViewController {
     }
     //計算式テキスト
     private func createFormulaText(calculationResultArea: UIView) {
-        calculationResultArea.addSubview(formulaText)
-        configureFormulaTextPosition(formulaText: formulaText, calculationResultArea: calculationResultArea)
-        congifureFormulaTextDesign(formulaText: formulaText)
+        calculationResultArea.addSubview(formulaTextLabel)
+        configureFormulaTextPosition(formulaTextLabel: formulaTextLabel, calculationResultArea: calculationResultArea)
+        congifureFormulaTextDesign(formulaTextLabel: formulaTextLabel)
     }
     //各種機能ボタン
     private func createFunctionalButton() {
@@ -126,12 +131,24 @@ extension CalculatorViewController {
         presenter.tapBackButton()
     }
     
+    @objc func tapCalculationButton(_ sender: UIButton) {
+        presenter.tapCalculationButton(calculationText: sender.currentTitle)
+    }
+    
+    @objc func tapResultButton(_ sender: UIButton) {
+        presenter.tapResultButton()
+    }
+    
 }
 
 
 extension CalculatorViewController: CalculatorPresenterOutput {
     func updateCalculationResult(resultText: String) {
         calculationResultTextField.text! = resultText
+    }
+    
+    func updateFormula(formulaText: String) {
+        formulaTextLabel.text! = formulaText
     }
 }
 
@@ -202,7 +219,7 @@ extension CalculatorViewController {
     }
     
     private func configureCalculationResultTextFieldDesign(calculationResultTextField: UITextField) {
-        calculationResultTextField.text = "12,345,667,899"
+        calculationResultTextField.text = ""
         calculationResultTextField.textAlignment = .right
         calculationResultTextField.font = UIFont(name: "RobotoCondensed-Bold", size: 40)
 //        calculationResultTextField.backgroundColor = UIColor.red
@@ -211,19 +228,19 @@ extension CalculatorViewController {
         calculationResultTextField.isEnabled = false
     }
     
-    private func configureFormulaTextPosition(formulaText: UILabel, calculationResultArea: UIView) {
-        formulaText.snp.makeConstraints { (make) in
+    private func configureFormulaTextPosition(formulaTextLabel: UILabel, calculationResultArea: UIView) {
+        formulaTextLabel.snp.makeConstraints { (make) in
             make.width.equalTo(view.bounds.width)
             make.height.equalTo(view.bounds.width / 12)
             make.bottom.equalTo(calculationResultArea.snp.bottom)
         }
     }
     
-    private func congifureFormulaTextDesign(formulaText: UILabel) {
-        formulaText.text = "( 3 + 30 - 10) * 10 / 3"
-        formulaText.textAlignment = .right
-        formulaText.textColor = UIColor.gray
-        formulaText.font = UIFont(name: "RobotoCondensed-Bold", size: 16)
+    private func congifureFormulaTextDesign(formulaTextLabel: UILabel) {
+        formulaTextLabel.text = ""
+        formulaTextLabel.textAlignment = .right
+        formulaTextLabel.textColor = UIColor.gray
+        formulaTextLabel.font = UIFont(name: "RobotoCondensed-Bold", size: 16)
 //        formulaText.backgroundColor = UIColor.green
     }
     
