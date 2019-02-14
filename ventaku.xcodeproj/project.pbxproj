@@ -15,6 +15,8 @@
 		F18FB87F2214109100374D08 /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB0221285C1007BEE00 /* RobotoCondensed-BoldItalic.ttf */; };
 		F18FB8802214109A00374D08 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB1221285C1007BEE00 /* RobotoCondensed-LightItalic.ttf */; };
 		F18FB8812214109C00374D08 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4CB2221285C1007BEE00 /* RobotoCondensed-Regular.ttf */; };
+		F18FB88322144F2100374D08 /* CalculatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18FB88222144F2100374D08 /* CalculatorPresenter.swift */; };
+		F18FB88522144F7C00374D08 /* CalculatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18FB88422144F7C00374D08 /* CalculatorModel.swift */; };
 		F1BC4C7D221281F5007BEE00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */; };
 		F1BC4C7F221281F5007BEE00 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */; };
 		F1BC4C82221281F5007BEE00 /* Calculator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BC4C80221281F5007BEE00 /* Calculator.storyboard */; };
@@ -52,6 +54,8 @@
 		D1ED8653118D603A784A0EEE /* Pods_ventakuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ventakuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D78F1C2D43706E948F22FB9C /* Pods-ventakuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ventakuTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ventakuTests/Pods-ventakuTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE7121C84F38064A750A9A4F /* Pods_ventaku.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ventaku.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F18FB88222144F2100374D08 /* CalculatorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorPresenter.swift; sourceTree = "<group>"; };
+		F18FB88422144F7C00374D08 /* CalculatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorModel.swift; sourceTree = "<group>"; };
 		F1BC4C79221281F5007BEE00 /* ventaku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ventaku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BC4C7C221281F5007BEE00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		F1BC4CAA22128235007BEE00 /* Calculator  */ = {
 			isa = PBXGroup;
 			children = (
+				F18FB88422144F7C00374D08 /* CalculatorModel.swift */,
+				F18FB88222144F2100374D08 /* CalculatorPresenter.swift */,
 				F1BC4C7E221281F5007BEE00 /* CalculatorViewController.swift */,
 				F1BC4C80221281F5007BEE00 /* Calculator.storyboard */,
 			);
@@ -443,8 +449,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F18FB88322144F2100374D08 /* CalculatorPresenter.swift in Sources */,
 				F1BC4C7F221281F5007BEE00 /* CalculatorViewController.swift in Sources */,
 				F1BC4C7D221281F5007BEE00 /* AppDelegate.swift in Sources */,
+				F18FB88522144F7C00374D08 /* CalculatorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

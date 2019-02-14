@@ -11,14 +11,17 @@ import SnapKit
 
 final class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
+    private var presenter:CalculatorPresenter!
+    
     private let calculationResultTextField = UITextField()
     private let formulaText = UILabel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        calculationResultTextField.delegate = self
+        presenter = CalculatorPresenter(view: self)
         
+        calculationResultTextField.delegate = self
         designSetUp()
     }
 }
@@ -38,6 +41,7 @@ extension CalculatorViewController {
         while numberCount <= 9 {
             let numberButton = UIButton(type: .custom)
             view.addSubview(numberButton)
+            numberButton.addTarget(self, action: #selector(tapNumberButton), for: .touchUpInside)
             configureNumberDesignPosition(numberButton: numberButton, number: numberCount)
             configureEachNumberButtonDesign(numberButton: numberButton, number: numberCount)
             numberCount += 1
@@ -95,6 +99,11 @@ extension CalculatorViewController {
         var eraceButtonCount = 0
         while eraceButtonCount <= 1 {
             let eraceButton = UIButton(type: .custom)
+            if eraceButtonCount == 0 {
+                eraceButton.addTarget(self, action: #selector(clearButton), for: .touchUpInside)
+            } else if eraceButtonCount == 1 {
+                eraceButton.addTarget(self, action: #selector(backButton), for: .touchUpInside)
+            }
             view.addSubview(eraceButton)
             configureEraceButtonPosition(eraceButton: eraceButton, eraceButtonCount: eraceButtonCount)
             configureEraceButtonDesign(eraceButton: eraceButton, eraceButtonCount: eraceButtonCount)
@@ -103,6 +112,29 @@ extension CalculatorViewController {
     }
     
 }
+
+extension CalculatorViewController {
+    @objc func tapNumberButton(_ sender: UIButton) {
+        presenter.tapNumberButton(numberText: sender.currentTitle)
+    }
+    
+    @objc func clearButton(_ sender: UIButton) {
+        presenter.tapClearButton()
+    }
+    
+    @objc func backButton(_ sender: UIButton) {
+        presenter.tapBackButton()
+    }
+    
+}
+
+
+extension CalculatorViewController: CalculatorPresenterOutput {
+    func updateCalculationResult(resultText: String) {
+        calculationResultTextField.text! = resultText
+    }
+}
+
 
 // design detail
 extension CalculatorViewController {
