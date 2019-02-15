@@ -33,7 +33,7 @@ extension CalculatorViewController {
         createCalculationButton()
         createCalculationResultArea()
         createFunctionalButton()
-        createEraceButton()
+        createBottomFunctionalButton()
     }
     //数字ボタン
     private func createNumberButton() {
@@ -67,7 +67,7 @@ extension CalculatorViewController {
     private func createCalculationResultArea() {
         let calculationResultArea = UIView()
         view.addSubview(calculationResultArea)
-        calculationResultArea.backgroundColor = UIColor.init(red: 196 / 252, green: 196 / 252, blue: 196 / 252, alpha: 252 / 252)
+//        calculationResultArea.backgroundColor = UIColor.init(red: 196 / 252, green: 196 / 252, blue: 196 / 252, alpha: 252 / 252)
         calculationResultArea.snp.makeConstraints{ make in
             make.width.equalTo(view.bounds.width)
             make.height.equalTo(view.bounds.width / 4)
@@ -99,20 +99,20 @@ extension CalculatorViewController {
             functionalButtonCount += 1
         }
     }
-    //削除、戻るボタン
-    private func createEraceButton() {
-        var eraceButtonCount = 0
-        while eraceButtonCount <= 1 {
-            let eraceButton = UIButton(type: .custom)
-            if eraceButtonCount == 0 {
-                eraceButton.addTarget(self, action: #selector(clearButton), for: .touchUpInside)
-            } else if eraceButtonCount == 1 {
-                eraceButton.addTarget(self, action: #selector(backButton), for: .touchUpInside)
+    
+    private func createBottomFunctionalButton() {
+        var bottomFunctionalButtonCount = 0
+        while bottomFunctionalButtonCount <= 1 {
+            let bottomFunctionalButton = UIButton(type: .custom)
+            if bottomFunctionalButtonCount == 0 {
+                bottomFunctionalButton.addTarget(self, action: #selector(tapDecimalButton), for: .touchUpInside)
+            } else if bottomFunctionalButtonCount == 1 {
+                bottomFunctionalButton.addTarget(self, action: #selector(tapClearButton), for: .touchUpInside)
             }
-            view.addSubview(eraceButton)
-            configureEraceButtonPosition(eraceButton: eraceButton, eraceButtonCount: eraceButtonCount)
-            configureEraceButtonDesign(eraceButton: eraceButton, eraceButtonCount: eraceButtonCount)
-            eraceButtonCount += 1
+            view.addSubview(bottomFunctionalButton)
+            configureBottomFunctionalButtonPosition(bottomFunctionalButton: bottomFunctionalButton, bottomFunctionalButtonCount: bottomFunctionalButtonCount)
+            configureBottomFunctionalButtonDesign(bottomFunctionalButton: bottomFunctionalButton, bottomFunctionalButtonCount: bottomFunctionalButtonCount)
+            bottomFunctionalButtonCount += 1
         }
     }
     
@@ -123,11 +123,11 @@ extension CalculatorViewController {
         presenter.tapNumberButton(numberText: sender.currentTitle)
     }
     
-    @objc func clearButton(_ sender: UIButton) {
+    @objc func tapClearButton(_ sender: UIButton) {
         presenter.tapClearButton()
     }
     
-    @objc func backButton(_ sender: UIButton) {
+    @objc func tapBackButton(_ sender: UIButton) {
         presenter.tapBackButton()
     }
     
@@ -139,6 +139,9 @@ extension CalculatorViewController {
         presenter.tapResultButton()
     }
     
+    @objc func tapDecimalButton(_ sender: UIButton) {
+        presenter.tapDecimalButton(desimalText: sender.currentTitle)
+    }
 }
 
 
@@ -221,6 +224,7 @@ extension CalculatorViewController {
     private func configureCalculationResultTextFieldDesign(calculationResultTextField: UITextField) {
         calculationResultTextField.text = ""
         calculationResultTextField.textAlignment = .right
+        calculationResultTextField.textColor = UIColor.white
         calculationResultTextField.font = UIFont(name: "RobotoCondensed-Bold", size: 40)
 //        calculationResultTextField.backgroundColor = UIColor.red
         
@@ -263,22 +267,22 @@ extension CalculatorViewController {
         functionalButton.layer.borderColor = UIColor.gray.cgColor
     }
     
-    private func configureEraceButtonPosition(eraceButton: UIButton, eraceButtonCount: Int) {
-        eraceButton.snp.makeConstraints { (make) in
+    private func configureBottomFunctionalButtonPosition(bottomFunctionalButton: UIButton, bottomFunctionalButtonCount: Int) {
+        bottomFunctionalButton.snp.makeConstraints { (make) in
             make.width.equalTo(view.bounds.width / 4)
             make.height.equalTo(view.bounds.width / 4)
             make.bottom.equalTo(view)
-            make.left.equalTo(view.bounds.width / 4 * CGFloat(eraceButtonCount + 1))
+            make.left.equalTo(view.bounds.width / 4 * CGFloat(bottomFunctionalButtonCount + 1))
         }
     }
     
-    private func configureEraceButtonDesign(eraceButton: UIButton, eraceButtonCount: Int) {
-        let eraceSymbolImage = ["C", "<"]
-        eraceButton.setTitle(eraceSymbolImage[eraceButtonCount], for: .normal)
-        eraceButton.setTitleColor(UIColor.black, for: .normal)
-        eraceButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
-        eraceButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
-        eraceButton.layer.borderWidth = 1
-        eraceButton.layer.borderColor = UIColor.gray.cgColor
+    private func configureBottomFunctionalButtonDesign(bottomFunctionalButton: UIButton, bottomFunctionalButtonCount: Int) {
+        let eraceSymbolImage = [".", "C"]
+        bottomFunctionalButton.setTitle(eraceSymbolImage[bottomFunctionalButtonCount], for: .normal)
+        bottomFunctionalButton.setTitleColor(UIColor.black, for: .normal)
+        bottomFunctionalButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
+        bottomFunctionalButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        bottomFunctionalButton.layer.borderWidth = 1
+        bottomFunctionalButton.layer.borderColor = UIColor.gray.cgColor
     }
 }
