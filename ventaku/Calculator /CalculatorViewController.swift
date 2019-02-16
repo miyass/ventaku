@@ -32,7 +32,7 @@ extension CalculatorViewController {
         createNumberButton()
         createCalculationButton()
         createCalculationResultArea()
-        createFunctionalButton()
+        createTopFunctionalButton()
         createBottomFunctionalButton()
     }
     //数字ボタン
@@ -89,18 +89,25 @@ extension CalculatorViewController {
         configureFormulaTextPosition(formulaTextLabel: formulaTextLabel, calculationResultArea: calculationResultArea)
         congifureFormulaTextDesign(formulaTextLabel: formulaTextLabel)
     }
-    //各種機能ボタン
-    private func createFunctionalButton() {
+    //各種機能ボタン(上段)
+    private func createTopFunctionalButton() {
         var functionalButtonCount = 0
         while functionalButtonCount <= 2 {
             let functionalButton = UIButton(type: .custom)
+            if functionalButtonCount == 0 {
+                functionalButton.addTarget(self, action: #selector(tapDecimalButton), for: .touchUpInside)
+            } else if functionalButtonCount == 1 {
+                functionalButton.addTarget(self, action: #selector(tapStartRoundBrackets), for: .touchUpInside)
+            } else if functionalButtonCount == 2 {
+                functionalButton.addTarget(self, action: #selector(tapEndRoundBrackets), for: .touchUpInside)
+            }
             view.addSubview(functionalButton)
-            configureFunctionalButtonPosition(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
-            configureFunctionalButtonDesign(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
+            configureTopFunctionalButtonPosition(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
+            configureTopFunctionalButtonDesign(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
             functionalButtonCount += 1
         }
     }
-    
+    //各種機能ボタン(下段)
     private func createBottomFunctionalButton() {
         var bottomFunctionalButtonCount = 0
         while bottomFunctionalButtonCount <= 1 {
@@ -142,6 +149,14 @@ extension CalculatorViewController {
     
     @objc func tapDecimalButton(_ sender: UIButton) {
         presenter.tapDecimalButton(desimalText: sender.currentTitle)
+    }
+    
+    @objc func tapStartRoundBrackets(_ sender: UIButton) {
+        presenter.tapStartRoundBrackets(startRoundBrackets: sender.currentTitle)
+    }
+    
+    @objc func tapEndRoundBrackets(_ sender: UIButton) {
+        presenter.tapEndRoundBrackets(endRoundBrackets: sender.currentTitle)
     }
 }
 
@@ -249,7 +264,7 @@ extension CalculatorViewController {
 //        formulaText.backgroundColor = UIColor.green
     }
     
-    private func configureFunctionalButtonPosition(functionalButton: UIButton, functionalButtonCount: Int) {
+    private func configureTopFunctionalButtonPosition(functionalButton: UIButton, functionalButtonCount: Int) {
         functionalButton.snp.makeConstraints { (make) in
             make.width.equalTo(view.bounds.width / 4)
             make.height.equalTo(view.bounds.width / 4)
@@ -258,7 +273,7 @@ extension CalculatorViewController {
         }
     }
     
-    private func configureFunctionalButtonDesign(functionalButton: UIButton, functionalButtonCount: Int) {
+    private func configureTopFunctionalButtonDesign(functionalButton: UIButton, functionalButtonCount: Int) {
         let functionalSymbolImage = [ "+/-", "(", ")" ]
         functionalButton.setTitle(functionalSymbolImage[functionalButtonCount], for: .normal)
         functionalButton.setTitleColor(UIColor.black, for: .normal)

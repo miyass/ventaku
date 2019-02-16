@@ -15,6 +15,8 @@ protocol CalculatorPresenterInput {
     func tapBackButton()
     func tapCalculationButton(calculationCount: Int)
     func tapResultButton()
+    func tapStartRoundBrackets(startRoundBrackets: String?)
+    func tapEndRoundBrackets(endRoundBrackets: String?)
 }
 
 protocol CalculatorPresenterOutput: AnyObject {
@@ -42,8 +44,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     func tapNumberButton(numberText: String?) {
         guard var resultText = numberText else { return }
         
-        isStartedInputNumber = true
-        
         if isResulted { return }
         if isInputtedDecimal {
             numberOfResultNumberDesimal += 1
@@ -51,6 +51,8 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         } else {
             currentResultNumber = currentResultNumber * 10 + Double(resultText)!
         }
+        
+        isStartedInputNumber = true
 
         currentFormulaText += String(resultText)
         resultText = String(currentResultNumber)
@@ -90,7 +92,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         
         if isInputtedDecimal { return }
         if isResulted { return }
-        //ここを数字があるないで判定すれば、、
         if !isStartedInputNumber { return }
         
         currentFormulaText += String(resultText)
@@ -101,7 +102,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     
     func tapCalculationButton(calculationCount: Int) {
 //        if !isStartedInputNumber { return }
-        
         if currentResultNumber == 0 { return }
         
         let calculationSymbolText = ["=", "+", "-", "*", "/"]
@@ -137,6 +137,24 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         isResulted = true
         
         self.view.updateCalculationResult(resultText: resultText)
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    func tapStartRoundBrackets(startRoundBrackets: String?) {
+        print("start")
+        guard let resultText = startRoundBrackets else { return }
+        
+        currentFormulaText += " \(resultText) "
+        
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    func tapEndRoundBrackets(endRoundBrackets: String?) {
+        print("end")
+        guard let resultText = endRoundBrackets else { return }
+        
+        currentFormulaText += " \(resultText) "
+        
         self.view.updateFormula(formulaText: currentFormulaText)
     }
 }
