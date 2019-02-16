@@ -30,10 +30,14 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     private(set) var currentFormulaText: String = ""
     
     private(set) var numberOfResultNumberDesimal: Double = 0
-    
+    //結果欄で小数点を入力しているかどうか
     private(set) var isInputtedDecimal: Bool = false
+    //数字が結果欄に入力されているかどうか
     private(set) var isStartedInputNumber: Bool = false
+    //=を押して結果を表示しているかどうか
     private(set) var isResulted: Bool = false
+    //(が計算式でスタートしているかどうか
+    private(set) var isRoundBracketsStarted: Bool = false
     
     private weak var view: CalculatorPresenterOutput!
     
@@ -62,6 +66,102 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         self.view.updateFormula(formulaText: currentFormulaText)
     }
     
+    func tapDecimalButton(desimalText: String?) {
+        guard let resultText = desimalText else { return }
+        
+        if isInputtedDecimal { return }
+        if isResulted { return }
+        if !isStartedInputNumber { return }
+        
+        currentFormulaText += String(resultText)
+        isInputtedDecimal = true
+        
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    func tapResultButton() {
+        if !isStartedInputNumber { return }
+        if isRoundBracketsStarted { return }
+        
+        let expression = NSExpression(format: currentFormulaText)
+        let result = expression.expressionValue(with: nil, context: nil) as! Double
+        
+        numberOfResultNumberDesimal = 0
+        isInputtedDecimal = false
+        isStartedInputNumber = false
+        isRoundBracketsStarted = false
+        
+        let resultText = String(result)
+        currentFormulaText = " \(resultText)"
+        
+        isResulted = true
+        
+        self.view.updateCalculationResult(resultText: resultText)
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    func tapCalculationButton(calculationCount: Int) {
+        let formulaTextEnd = currentFormulaText.suffix(1)
+        let formulaEndNumber = Int(formulaTextEnd)
+        
+        if formulaTextEnd.hasSuffix(")") || formulaEndNumber != nil {
+            print("iiyo!!!")
+            
+            let calculationSymbolText = ["=", "+", "-", "*", "/"]
+            var resultText = calculationSymbolText[calculationCount]
+            currentResultNumber = 0
+            currentFormulaText += " \(resultText) "
+            
+            numberOfResultNumberDesimal = 0
+            isInputtedDecimal = false
+            isStartedInputNumber = false
+            isResulted = false
+            
+            resultText = String(currentResultNumber)
+            resultText = modifiedResultTextFromDouble(resultText: resultText)
+            
+            self.view.updateCalculationResult(resultText: resultText)
+            self.view.updateFormula(formulaText: currentFormulaText)
+        } else {
+            return
+        }
+    }
+    
+    func tapStartRoundBrackets(startRoundBrackets: String?) {
+        print("start")
+        guard let resultText = startRoundBrackets else { return }
+        
+        if isRoundBracketsStarted { return }
+        if isStartedInputNumber { return }
+        
+        currentFormulaText += " \(resultText)"
+        
+        isRoundBracketsStarted = true
+        
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    func tapEndRoundBrackets(endRoundBrackets: String?) {
+        print("end")
+        guard let endRoundBracketsText = endRoundBrackets else { return }
+        
+        if !isRoundBracketsStarted { return }
+        if !isStartedInputNumber { return }
+        
+        currentResultNumber = 0
+        currentFormulaText += " \(endRoundBracketsText)"
+        
+        let resultText = String(currentResultNumber)
+        
+        isRoundBracketsStarted = false
+        isStartedInputNumber = false
+        
+        self.view.updateCalculationResult(resultText: resultText)
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    
+    
     func tapClearButton() {
         currentResultNumber = 0
         currentFormulaText = ""
@@ -70,6 +170,7 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         isInputtedDecimal = false
         isStartedInputNumber = false
         isResulted = false
+        isRoundBracketsStarted = false
         var resultText = String(currentResultNumber)
         
         resultText = modifiedResultTextFromDouble(resultText: resultText)
@@ -87,76 +188,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         self.view.updateFormula(formulaText: currentFormulaText)
     }
     
-    func tapDecimalButton(desimalText: String?) {
-        guard let resultText = desimalText else { return }
-        
-        if isInputtedDecimal { return }
-        if isResulted { return }
-        if !isStartedInputNumber { return }
-        
-        currentFormulaText += String(resultText)
-        isInputtedDecimal = true
-        
-        self.view.updateFormula(formulaText: currentFormulaText)
-    }
-    
-    func tapCalculationButton(calculationCount: Int) {
-//        if !isStartedInputNumber { return }
-        if currentResultNumber == 0 { return }
-        
-        let calculationSymbolText = ["=", "+", "-", "*", "/"]
-        var resultText = calculationSymbolText[calculationCount]
-        currentResultNumber = 0
-        currentFormulaText += " \(resultText) "
-        
-        numberOfResultNumberDesimal = 0
-        isInputtedDecimal = false
-        isStartedInputNumber = false
-        isResulted = false
-        
-        resultText = String(currentResultNumber)
-        resultText = modifiedResultTextFromDouble(resultText: resultText)
-        
-        self.view.updateCalculationResult(resultText: resultText)
-        self.view.updateFormula(formulaText: currentFormulaText)
-    }
-    
-    func tapResultButton() {
-        if !isStartedInputNumber { return }
-        
-        let expression = NSExpression(format: currentFormulaText)
-        let result = expression.expressionValue(with: nil, context: nil) as! Double
-        
-        numberOfResultNumberDesimal = 0
-        isInputtedDecimal = false
-        isStartedInputNumber = false
-        
-        let resultText = String(result)
-        currentFormulaText = " \(resultText)"
-        
-        isResulted = true
-        
-        self.view.updateCalculationResult(resultText: resultText)
-        self.view.updateFormula(formulaText: currentFormulaText)
-    }
-    
-    func tapStartRoundBrackets(startRoundBrackets: String?) {
-        print("start")
-        guard let resultText = startRoundBrackets else { return }
-        
-        currentFormulaText += " \(resultText) "
-        
-        self.view.updateFormula(formulaText: currentFormulaText)
-    }
-    
-    func tapEndRoundBrackets(endRoundBrackets: String?) {
-        print("end")
-        guard let resultText = endRoundBrackets else { return }
-        
-        currentFormulaText += " \(resultText) "
-        
-        self.view.updateFormula(formulaText: currentFormulaText)
-    }
 }
 
 extension CalculatorPresenter {
