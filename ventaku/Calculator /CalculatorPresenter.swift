@@ -13,7 +13,7 @@ protocol CalculatorPresenterInput {
     func tapDecimalButton(desimalText: String?)
     func tapClearButton()
     func tapBackButton()
-    func tapCalculationButton(calculationText: String?)
+    func tapCalculationButton(calculationCount: Int)
     func tapResultButton()
 }
 
@@ -25,11 +25,13 @@ protocol CalculatorPresenterOutput: AnyObject {
 final class CalculatorPresenter: CalculatorPresenterInput {
     
     private(set) var currentResultNumber: Double = 0
-    private(set) var numberOfResultNumberDesimal: Double = 0
-    
     private(set) var currentFormulaText: String = ""
     
-    private(set) var switchInputDecimal: Bool = false
+    private(set) var numberOfResultNumberDesimal: Double = 0
+    
+    private(set) var isInputtedDecimal: Bool = false
+    private(set) var isStartedInputNumber: Bool = false
+    private(set) var isResulted: Bool = false
     
     private weak var view: CalculatorPresenterOutput!
     
@@ -40,7 +42,10 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     func tapNumberButton(numberText: String?) {
         guard var resultText = numberText else { return }
         
-        if switchInputDecimal {
+        isStartedInputNumber = true
+        
+        if isResulted { return }
+        if isInputtedDecimal {
             numberOfResultNumberDesimal += 1
             currentResultNumber = currentResultNumber + Double(resultText)! * pow(0.1, numberOfResultNumberDesimal)
         } else {
@@ -55,17 +60,14 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         self.view.updateFormula(formulaText: currentFormulaText)
     }
     
-    func tapDecimalButton(desimalText: String?) {
-        guard let resultText = desimalText else { return }
-        
-        currentFormulaText += String(resultText)
-        switchInputDecimal = true
-
-        self.view.updateFormula(formulaText: currentFormulaText)
-    }
-    
     func tapClearButton() {
-        resetAllFields()
+        currentResultNumber = 0
+        currentFormulaText = ""
+        
+        numberOfResultNumberDesimal = 0
+        isInputtedDecimal = false
+        isStartedInputNumber = false
+        isResulted = false
         var resultText = String(currentResultNumber)
         
         resultText = modifiedResultTextFromDouble(resultText: resultText)
@@ -83,12 +85,34 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         self.view.updateFormula(formulaText: currentFormulaText)
     }
     
-    func tapCalculationButton(calculationText: String?) {
-        guard var resultText = calculationText else { return }
+    func tapDecimalButton(desimalText: String?) {
+        guard let resultText = desimalText else { return }
+        
+        if isInputtedDecimal { return }
+        if isResulted { return }
+        //ここを数字があるないで判定すれば、、
+        if !isStartedInputNumber { return }
+        
+        currentFormulaText += String(resultText)
+        isInputtedDecimal = true
+        
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
+    
+    func tapCalculationButton(calculationCount: Int) {
+//        if !isStartedInputNumber { return }
+        
+        if currentResultNumber == 0 { return }
+        
+        let calculationSymbolText = ["=", "+", "-", "*", "/"]
+        var resultText = calculationSymbolText[calculationCount]
         currentResultNumber = 0
         currentFormulaText += " \(resultText) "
         
-        resetDecimalFields()
+        numberOfResultNumberDesimal = 0
+        isInputtedDecimal = false
+        isStartedInputNumber = false
+        isResulted = false
         
         resultText = String(currentResultNumber)
         resultText = modifiedResultTextFromDouble(resultText: resultText)
@@ -98,14 +122,19 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     }
     
     func tapResultButton() {
-
+        if !isStartedInputNumber { return }
+        
         let expression = NSExpression(format: currentFormulaText)
         let result = expression.expressionValue(with: nil, context: nil) as! Double
         
-        resetDecimalFields()
+        numberOfResultNumberDesimal = 0
+        isInputtedDecimal = false
+        isStartedInputNumber = false
         
         let resultText = String(result)
-        currentFormulaText = ""
+        currentFormulaText = " \(resultText)"
+        
+        isResulted = true
         
         self.view.updateCalculationResult(resultText: resultText)
         self.view.updateFormula(formulaText: currentFormulaText)
@@ -125,6 +154,13 @@ extension CalculatorPresenter {
         return modifiedResultText
     }
     
+    private func convertToFormulaFromText(formulaText: String) throws -> Double {
+        let expression = NSExpression(format: currentFormulaText)
+        let result = expression.expressionValue(with: nil, context: nil) as! Double
+        return result
+    }
+    
+    
     private func resetAllFields() {
         resetResultFields()
         resetDecimalFields()
@@ -133,10 +169,12 @@ extension CalculatorPresenter {
     private func resetResultFields() {
         currentResultNumber = 0
         currentFormulaText = ""
+        isStartedInputNumber = false
     }
     
     private func resetDecimalFields() {
         numberOfResultNumberDesimal = 0
-        switchInputDecimal = false
+        isInputtedDecimal = false
+        isStartedInputNumber = false
     }
 }

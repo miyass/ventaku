@@ -56,6 +56,7 @@ extension CalculatorViewController {
             if calculateCount == 0 {
                 calculationButton.addTarget(self, action: #selector(tapResultButton), for: .touchUpInside)
             } else {
+                calculationButton.tag = calculateCount
                 calculationButton.addTarget(self, action: #selector(tapCalculationButton), for: .touchUpInside)
             }
             configureCalculationDesignPosition(calculationButton: calculationButton, calculateCount: calculateCount)
@@ -132,7 +133,7 @@ extension CalculatorViewController {
     }
     
     @objc func tapCalculationButton(_ sender: UIButton) {
-        presenter.tapCalculationButton(calculationText: sender.currentTitle)
+        presenter.tapCalculationButton(calculationCount: sender.tag)
     }
     
     @objc func tapResultButton(_ sender: UIButton) {
