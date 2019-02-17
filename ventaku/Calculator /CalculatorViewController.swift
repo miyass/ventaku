@@ -71,7 +71,7 @@ extension CalculatorViewController {
 //        calculationResultArea.backgroundColor = UIColor.init(red: 196 / 252, green: 196 / 252, blue: 196 / 252, alpha: 252 / 252)
         calculationResultArea.snp.makeConstraints{ make in
             make.width.equalTo(view.bounds.width)
-            make.height.equalTo(view.bounds.width / 4)
+            make.height.equalTo(view.bounds.width / 3.5)
             make.bottom.equalTo(view).offset(view.bounds.width / 4 * -5)
         }
         createCalculationResultTextField(calculationResultArea: calculationResultArea)
@@ -234,14 +234,16 @@ extension CalculatorViewController {
             make.width.equalTo(view.bounds.width)
             make.height.equalTo(view.bounds.width / 4)
             make.top.equalTo(calculationResultArea.snp.top)
+            make.right.equalTo(view).offset(view.bounds.width / -8)
         }
     }
     
     private func configureCalculationResultTextFieldDesign(calculationResultTextField: UITextField) {
         calculationResultTextField.text = ""
         calculationResultTextField.textAlignment = .right
+        calculationResultTextField.contentVerticalAlignment = .center
         calculationResultTextField.textColor = UIColor.white
-        calculationResultTextField.font = UIFont(name: "RobotoCondensed-Bold", size: 40)
+        calculationResultTextField.font = UIFont(name: "RobotoCondensed-Bold", size: 48)
 //        calculationResultTextField.backgroundColor = UIColor.red
         
         //入力不可の方法。お気に入り機能からの遷移時には使えるようにする。
@@ -253,6 +255,7 @@ extension CalculatorViewController {
             make.width.equalTo(view.bounds.width)
             make.height.equalTo(view.bounds.width / 12)
             make.bottom.equalTo(calculationResultArea.snp.bottom)
+            make.right.equalTo(view).offset(view.bounds.width / -8)
         }
     }
     
@@ -260,8 +263,8 @@ extension CalculatorViewController {
         formulaTextLabel.text = ""
         formulaTextLabel.textAlignment = .right
         formulaTextLabel.textColor = UIColor.gray
-        formulaTextLabel.font = UIFont(name: "RobotoCondensed-Bold", size: 16)
-//        formulaText.backgroundColor = UIColor.green
+        formulaTextLabel.font = UIFont(name: "RobotoCondensed-Bold", size: 24)
+//        formulaTextLabel.backgroundColor = UIColor.green
     }
     
     private func configureTopFunctionalButtonPosition(functionalButton: UIButton, functionalButtonCount: Int) {

@@ -91,7 +91,10 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         isStartedInputNumber = false
         isRoundBracketsStarted = false
         
-        let resultText = String(result)
+        var resultText = String(result)
+        if resultText.hasSuffix(".0") {
+            resultText = String(resultText.prefix(resultText.characters.count - 2))
+        }
         currentFormulaText = " \(resultText)"
         
         isResulted = true
@@ -105,8 +108,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         let formulaEndNumber = Int(formulaTextEnd)
         
         if formulaTextEnd.hasSuffix(")") || formulaEndNumber != nil {
-            print("iiyo!!!")
-            
             let calculationSymbolText = ["=", "+", "-", "*", "/"]
             var resultText = calculationSymbolText[calculationCount]
             currentResultNumber = 0
@@ -128,13 +129,12 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     }
     
     func tapStartRoundBrackets(startRoundBrackets: String?) {
-        print("start")
-        guard let resultText = startRoundBrackets else { return }
+        guard let startRoundBracketsText = startRoundBrackets else { return }
         
         if isRoundBracketsStarted { return }
         if isStartedInputNumber { return }
         
-        currentFormulaText += " \(resultText)"
+        currentFormulaText += "\(startRoundBracketsText)"
         
         isRoundBracketsStarted = true
         
@@ -142,14 +142,13 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     }
     
     func tapEndRoundBrackets(endRoundBrackets: String?) {
-        print("end")
         guard let endRoundBracketsText = endRoundBrackets else { return }
         
         if !isRoundBracketsStarted { return }
         if !isStartedInputNumber { return }
         
         currentResultNumber = 0
-        currentFormulaText += " \(endRoundBracketsText)"
+        currentFormulaText += "\(endRoundBracketsText)"
         
         let resultText = String(currentResultNumber)
         
