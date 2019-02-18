@@ -179,12 +179,13 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     }
     
     func tapBackButton() {
-        currentResultNumber = currentResultNumber / 10
-        let resultText = String(currentResultNumber)
-        currentFormulaText = String(currentResultNumber)
-        
-        self.view.updateCalculationResult(resultText: resultText)
-        self.view.updateFormula(formulaText: currentFormulaText)
+        print("tapBackButton")
+//        currentResultNumber = currentResultNumber / 10
+//        let resultText = String(currentResultNumber)
+//        currentFormulaText = String(currentResultNumber)
+//
+//        self.view.updateCalculationResult(resultText: resultText)
+//        self.view.updateFormula(formulaText: currentFormulaText)
     }
     
 }

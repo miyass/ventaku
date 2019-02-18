@@ -16,6 +16,8 @@ final class CalculatorViewController: UIViewController, UITextFieldDelegate {
     private let calculationResultTextField = UITextField()
     private let formulaTextLabel = UILabel()
     
+    private let buttonBottomMargin: CGFloat = 30.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,10 +74,11 @@ extension CalculatorViewController {
         calculationResultArea.snp.makeConstraints{ make in
             make.width.equalTo(view.bounds.width)
             make.height.equalTo(view.bounds.width / 3.5)
-            make.bottom.equalTo(view).offset(view.bounds.width / 4 * -5)
+            make.bottom.equalTo(view).offset(view.bounds.width / 4 * -5 - buttonBottomMargin)
         }
         createCalculationResultTextField(calculationResultArea: calculationResultArea)
         createFormulaText(calculationResultArea: calculationResultArea)
+        createBackButton(calculationResultArea: calculationResultArea)
     }
     //計算結果テキスト
     private func createCalculationResultTextField(calculationResultArea: UIView) {
@@ -89,6 +92,15 @@ extension CalculatorViewController {
         configureFormulaTextPosition(formulaTextLabel: formulaTextLabel, calculationResultArea: calculationResultArea)
         congifureFormulaTextDesign(formulaTextLabel: formulaTextLabel)
     }
+    //戻るボタン
+    private func createBackButton(calculationResultArea: UIView) {
+        let backButton = UIButton(type: .custom)
+        backButton.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
+        calculationResultArea.addSubview(backButton)
+        configureBackButtonPosition(backButton: backButton, calculationResultArea: calculationResultArea)
+        configureBackButtonDesign(backButton: backButton)
+    }
+    
     //各種機能ボタン(上段)
     private func createTopFunctionalButton() {
         var functionalButtonCount = 0
@@ -178,7 +190,7 @@ extension CalculatorViewController {
         calculationButton.snp.makeConstraints{(make) in
             make.width.equalTo(view.bounds.width / 4)
             make.height.equalTo(view.bounds.width / 4)
-            make.bottom.equalTo(view).offset(view.bounds.width / 4 * CGFloat(-calculateCount))
+            make.bottom.equalTo(view).offset(view.bounds.width / 4 * CGFloat(-calculateCount) - buttonBottomMargin)
             make.right.equalTo(view)
         }
     }
@@ -189,8 +201,10 @@ extension CalculatorViewController {
         calculationButton.setTitleColor(UIColor.black, for: .normal)
         calculationButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
         calculationButton.backgroundColor = UIColor.init(red: 26 / 252, green: 161 / 252, blue: 112 / 252, alpha: 252 / 252)
-        calculationButton.layer.borderWidth = 1
-        calculationButton.layer.borderColor = UIColor.gray.cgColor
+        calculationButton.layer.borderWidth = 2
+        calculationButton.layer.borderColor = UIColor.init(red: 81 / 252, green: 89 / 252, blue: 87 / 252, alpha: 252 / 252).cgColor
+        
+        calculationButton.layer.cornerRadius = view.bounds.width / 16
     }
     
     private func configureNumberDesignPosition(numberButton: UIButton, number: Int) {
@@ -215,7 +229,7 @@ extension CalculatorViewController {
         numberButton.snp.makeConstraints{(make) in
             make.width.equalTo(view.bounds.width / 4)
             make.height.equalTo(view.bounds.width / 4)
-            make.bottom.equalTo(view).offset(view.bounds.width / 4 * -numberHeightSort)
+            make.bottom.equalTo(view).offset(view.bounds.width / 4 * -numberHeightSort - buttonBottomMargin)
             make.left.equalTo(view).offset(view.bounds.width / 4 * numberWidthSort)
         }
     }
@@ -225,8 +239,10 @@ extension CalculatorViewController {
         numberButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
         numberButton.setTitleColor(UIColor.black, for: .normal)
         numberButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
-        numberButton.layer.borderWidth = 1
-        numberButton.layer.borderColor = UIColor.gray.cgColor
+        numberButton.layer.borderWidth = 2
+        numberButton.layer.borderColor = UIColor.init(red: 81 / 252, green: 89 / 252, blue: 87 / 252, alpha: 252 / 252).cgColor
+        
+        numberButton.layer.cornerRadius = view.bounds.width / 16
     }
     
     private func configureCalculationResultTextFieldPosition(calculationResultTextField: UITextField, calculationResultArea: UIView) {
@@ -267,11 +283,27 @@ extension CalculatorViewController {
 //        formulaTextLabel.backgroundColor = UIColor.green
     }
     
+    private func configureBackButtonPosition(backButton: UIButton, calculationResultArea: UIView) {
+        backButton.snp.makeConstraints { (make) in
+            make.width.equalTo(view.bounds.width / 8)
+            make.height.equalTo(view.bounds.width / 4)
+            make.right.equalTo(calculationResultArea)
+        }
+    }
+    
+    private func configureBackButtonDesign(backButton: UIButton) {
+        backButton.setTitle("<", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 40)
+        backButton.contentVerticalAlignment = .center
+//        backButton.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
+    }
+    
     private func configureTopFunctionalButtonPosition(functionalButton: UIButton, functionalButtonCount: Int) {
         functionalButton.snp.makeConstraints { (make) in
             make.width.equalTo(view.bounds.width / 4)
             make.height.equalTo(view.bounds.width / 4)
-            make.bottom.equalTo(view.bounds.width / 4 * -4)
+            make.bottom.equalTo(view.bounds.width / 4 * -4 - buttonBottomMargin)
             make.left.equalTo(view.bounds.width / 4 * CGFloat(functionalButtonCount))
         }
     }
@@ -282,15 +314,17 @@ extension CalculatorViewController {
         functionalButton.setTitleColor(UIColor.black, for: .normal)
         functionalButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
         functionalButton.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
-        functionalButton.layer.borderWidth = 1
-        functionalButton.layer.borderColor = UIColor.gray.cgColor
+        functionalButton.layer.borderWidth = 2
+        functionalButton.layer.borderColor = UIColor.init(red: 81 / 252, green: 89 / 252, blue: 87 / 252, alpha: 252 / 252).cgColor
+        
+        functionalButton.layer.cornerRadius = view.bounds.width / 16
     }
     
     private func configureBottomFunctionalButtonPosition(bottomFunctionalButton: UIButton, bottomFunctionalButtonCount: Int) {
         bottomFunctionalButton.snp.makeConstraints { (make) in
             make.width.equalTo(view.bounds.width / 4)
             make.height.equalTo(view.bounds.width / 4)
-            make.bottom.equalTo(view)
+            make.bottom.equalTo(view).offset(-buttonBottomMargin)
             make.left.equalTo(view.bounds.width / 4 * CGFloat(bottomFunctionalButtonCount + 1))
         }
     }
@@ -301,7 +335,9 @@ extension CalculatorViewController {
         bottomFunctionalButton.setTitleColor(UIColor.black, for: .normal)
         bottomFunctionalButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
         bottomFunctionalButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
-        bottomFunctionalButton.layer.borderWidth = 1
-        bottomFunctionalButton.layer.borderColor = UIColor.gray.cgColor
+        bottomFunctionalButton.layer.borderWidth = 2
+        bottomFunctionalButton.layer.borderColor = UIColor.init(red: 81 / 252, green: 89 / 252, blue: 87 / 252, alpha: 252 / 252).cgColor
+        
+        bottomFunctionalButton.layer.cornerRadius = view.bounds.width / 16
     }
 }
