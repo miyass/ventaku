@@ -247,7 +247,7 @@ extension CalculatorViewController {
     
     private func configureCalculationResultTextFieldPosition(calculationResultTextField: UITextField, calculationResultArea: UIView) {
         calculationResultTextField.snp.makeConstraints { (make) in
-            make.width.equalTo(view.bounds.width)
+            make.width.equalTo(view.bounds.width / 8 * 7)
             make.height.equalTo(view.bounds.width / 4)
             make.top.equalTo(calculationResultArea.snp.top)
             make.right.equalTo(view).offset(view.bounds.width / -8)
@@ -260,6 +260,7 @@ extension CalculatorViewController {
         calculationResultTextField.contentVerticalAlignment = .center
         calculationResultTextField.textColor = UIColor.white
         calculationResultTextField.font = UIFont(name: "RobotoCondensed-Bold", size: 48)
+        calculationResultTextField.adjustsFontSizeToFitWidth = true
 //        calculationResultTextField.backgroundColor = UIColor.red
         
         //入力不可の方法。お気に入り機能からの遷移時には使えるようにする。
@@ -268,7 +269,7 @@ extension CalculatorViewController {
     
     private func configureFormulaTextPosition(formulaTextLabel: UILabel, calculationResultArea: UIView) {
         formulaTextLabel.snp.makeConstraints { (make) in
-            make.width.equalTo(view.bounds.width)
+            make.width.equalTo(view.bounds.width / 8 * 7)
             make.height.equalTo(view.bounds.width / 12)
             make.bottom.equalTo(calculationResultArea.snp.bottom)
             make.right.equalTo(view).offset(view.bounds.width / -8)
@@ -280,6 +281,7 @@ extension CalculatorViewController {
         formulaTextLabel.textAlignment = .right
         formulaTextLabel.textColor = UIColor.gray
         formulaTextLabel.font = UIFont(name: "RobotoCondensed-Bold", size: 24)
+        formulaTextLabel.adjustsFontSizeToFitWidth = true
 //        formulaTextLabel.backgroundColor = UIColor.green
     }
     

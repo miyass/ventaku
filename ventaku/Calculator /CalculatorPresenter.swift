@@ -48,7 +48,12 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     func tapNumberButton(numberText: String?) {
         guard var resultText = numberText else { return }
         
+        let formulaTextEnd = currentFormulaText.suffix(1)
+        
         if isResulted { return }
+        if formulaTextEnd.hasSuffix(")") { return }
+        
+        
         if isInputtedDecimal {
             numberOfResultNumberDesimal += 1
             currentResultNumber = currentResultNumber + Double(resultText)! * pow(0.1, numberOfResultNumberDesimal)
@@ -56,9 +61,14 @@ final class CalculatorPresenter: CalculatorPresenterInput {
             currentResultNumber = currentResultNumber * 10 + Double(resultText)!
         }
         
+        if isStartedInputNumber {
+            currentFormulaText += resultText
+        } else {
+            currentFormulaText += " \(resultText)"
+        }
+        
         isStartedInputNumber = true
-
-        currentFormulaText += String(resultText)
+        
         resultText = String(currentResultNumber)
         resultText = modifiedResultTextFromDouble(resultText: resultText)
         
@@ -68,18 +78,23 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     
     func tapDecimalButton(desimalText: String?) {
         guard let resultText = desimalText else { return }
+//        if isInputtedDecimal { return }
+//        if !isStartedInputNumber { return }
         
-        if isInputtedDecimal { return }
+        let formulaTextEnd = currentFormulaText.suffix(1)
+        let formulaEndNumber = Int(formulaTextEnd)
+        if formulaEndNumber == nil { return }
         if isResulted { return }
-        if !isStartedInputNumber { return }
         
-        currentFormulaText += String(resultText)
+        currentFormulaText += resultText
         isInputtedDecimal = true
         
         self.view.updateFormula(formulaText: currentFormulaText)
     }
     
     func tapResultButton() {
+        //ここでバリデーション書くか
+        
         if !isStartedInputNumber { return }
         if isRoundBracketsStarted { return }
         
@@ -111,7 +126,7 @@ final class CalculatorPresenter: CalculatorPresenterInput {
             let calculationSymbolText = ["=", "+", "-", "*", "/"]
             var resultText = calculationSymbolText[calculationCount]
             currentResultNumber = 0
-            currentFormulaText += " \(resultText) "
+            currentFormulaText += " \(resultText)"
             
             numberOfResultNumberDesimal = 0
             isInputtedDecimal = false
@@ -133,8 +148,9 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         
         if isRoundBracketsStarted { return }
         if isStartedInputNumber { return }
+        if isResulted { return }
         
-        currentFormulaText += "\(startRoundBracketsText)"
+        currentFormulaText += " \(startRoundBracketsText)"
         
         isRoundBracketsStarted = true
         
@@ -148,7 +164,7 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         if !isStartedInputNumber { return }
         
         currentResultNumber = 0
-        currentFormulaText += "\(endRoundBracketsText)"
+        currentFormulaText += " \(endRoundBracketsText)"
         
         let resultText = String(currentResultNumber)
         
@@ -179,13 +195,43 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     }
     
     func tapBackButton() {
-        print("tapBackButton")
-//        currentResultNumber = currentResultNumber / 10
-//        let resultText = String(currentResultNumber)
-//        currentFormulaText = String(currentResultNumber)
-//
-//        self.view.updateCalculationResult(resultText: resultText)
-//        self.view.updateFormula(formulaText: currentFormulaText)
+        var splitFormulaTexts = currentFormulaText.components(separatedBy: " ")
+        let removeLastFormulaText = splitFormulaTexts[splitFormulaTexts.count - 1]
+        let removeLastFormulaNumber = Float(removeLastFormulaText)
+    
+        splitFormulaTexts.removeLast()
+        
+        if removeLastFormulaText == ")" {
+            //)消した後の数字に続けていける
+            isRoundBracketsStarted = true
+            isStartedInputNumber = true
+            //あまり良くないかも
+            isResulted = true
+        } else if removeLastFormulaText == "(" {
+            isRoundBracketsStarted = false
+            isStartedInputNumber = false
+        } else if removeLastFormulaNumber != nil {
+            //resultを消す可能性も考慮せよ
+            isStartedInputNumber = false
+            isResulted = false
+            isInputtedDecimal = false
+        } else if removeLastFormulaNumber == nil {
+            //あまり良くないかも
+            isStartedInputNumber = true
+            isResulted = true
+        }
+        
+        currentResultNumber = 0
+        currentFormulaText = ""
+        for splitFormulaText  in splitFormulaTexts {
+            currentFormulaText += " \(splitFormulaText)"
+        }
+        
+        var resultText = String(currentResultNumber)
+        resultText = modifiedResultTextFromDouble(resultText: resultText)
+    
+        self.view.updateCalculationResult(resultText: resultText)
+        self.view.updateFormula(formulaText: currentFormulaText)
     }
     
 }
