@@ -17,6 +17,7 @@ protocol CalculatorPresenterInput {
     func tapResultButton()
     func tapStartRoundBrackets(startRoundBrackets: String?)
     func tapEndRoundBrackets(endRoundBrackets: String?)
+    func tapSwitchPlusOrMinusButton()
 }
 
 protocol CalculatorPresenterOutput: AnyObject {
@@ -53,7 +54,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         if isResulted { return }
         if formulaTextEnd.hasSuffix(")") { return }
         
-        
         if isInputtedDecimal {
             numberOfResultNumberDesimal += 1
             currentResultNumber = currentResultNumber + Double(resultText)! * pow(0.1, numberOfResultNumberDesimal)
@@ -78,8 +78,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     
     func tapDecimalButton(desimalText: String?) {
         guard let resultText = desimalText else { return }
-//        if isInputtedDecimal { return }
-//        if !isStartedInputNumber { return }
         
         let formulaTextEnd = currentFormulaText.suffix(1)
         let formulaEndNumber = Int(formulaTextEnd)
@@ -93,8 +91,6 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     }
     
     func tapResultButton() {
-        //ここでバリデーション書くか
-        
         if !isStartedInputNumber { return }
         if isRoundBracketsStarted { return }
         
@@ -166,7 +162,8 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         currentResultNumber = 0
         currentFormulaText += " \(endRoundBracketsText)"
         
-        let resultText = String(currentResultNumber)
+        var resultText = String(currentResultNumber)
+        resultText = modifiedResultTextFromDouble(resultText: resultText)
         
         isRoundBracketsStarted = false
         isStartedInputNumber = false
@@ -175,7 +172,29 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         self.view.updateFormula(formulaText: currentFormulaText)
     }
     
-    
+    func tapSwitchPlusOrMinusButton() {
+        var splitFormulaTexts = currentFormulaText.components(separatedBy: " ")
+        let lastFormulaText = splitFormulaTexts[splitFormulaTexts.count - 1]
+        var lastFormulaNumber = Double(lastFormulaText)
+        if lastFormulaNumber != nil {
+            currentResultNumber *= -1
+            lastFormulaNumber! *= -1
+        } else {
+            return
+        }
+        let resultText: String = modifiedResultTextFromDouble(resultText: String(lastFormulaNumber!))
+        
+        splitFormulaTexts.removeLast()
+        splitFormulaTexts.append(resultText)
+
+        currentFormulaText = ""
+        for splitFormulaText  in splitFormulaTexts {
+            currentFormulaText += " \(splitFormulaText)"
+        }
+        
+        self.view.updateCalculationResult(resultText: resultText)
+        self.view.updateFormula(formulaText: currentFormulaText)
+    }
     
     func tapClearButton() {
         currentResultNumber = 0
@@ -187,9 +206,7 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         isResulted = false
         isRoundBracketsStarted = false
         var resultText = String(currentResultNumber)
-        
         resultText = modifiedResultTextFromDouble(resultText: resultText)
-        
         self.view.updateCalculationResult(resultText: resultText)
         self.view.updateFormula(formulaText: currentFormulaText)
     }
@@ -198,30 +215,48 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         var splitFormulaTexts = currentFormulaText.components(separatedBy: " ")
         let removeLastFormulaText = splitFormulaTexts[splitFormulaTexts.count - 1]
         let removeLastFormulaNumber = Float(removeLastFormulaText)
-    
+        
+        let shouldChangeSecondNumber = Double(splitFormulaTexts[splitFormulaTexts.count - 2])
+        
         splitFormulaTexts.removeLast()
         
         if removeLastFormulaText == ")" {
+            if shouldChangeSecondNumber != nil {
+                currentResultNumber = shouldChangeSecondNumber!
+            } else {
+                currentResultNumber = 0
+            }
+            
             //)消した後の数字に続けていける
             isRoundBracketsStarted = true
             isStartedInputNumber = true
             //あまり良くないかも
             isResulted = true
         } else if removeLastFormulaText == "(" {
+            
+            currentResultNumber = 0
+            
             isRoundBracketsStarted = false
             isStartedInputNumber = false
         } else if removeLastFormulaNumber != nil {
             //resultを消す可能性も考慮せよ
+            currentResultNumber = 0
+            
             isStartedInputNumber = false
             isResulted = false
             isInputtedDecimal = false
         } else if removeLastFormulaNumber == nil {
+            if shouldChangeSecondNumber != nil {
+                currentResultNumber = shouldChangeSecondNumber!
+            } else {
+                currentResultNumber = 0
+            }
+            
             //あまり良くないかも
             isStartedInputNumber = true
             isResulted = true
         }
         
-        currentResultNumber = 0
         currentFormulaText = ""
         for splitFormulaText  in splitFormulaTexts {
             currentFormulaText += " \(splitFormulaText)"
@@ -237,15 +272,13 @@ final class CalculatorPresenter: CalculatorPresenterInput {
 }
 
 extension CalculatorPresenter {
-    
     private func modifiedResultTextFromDouble(resultText: String) -> String {
         var modifiedResultText = resultText
-        
         let isDoubled = resultText.hasSuffix(".0")
+        let modifiedResultNumber = Double(modifiedResultText)
         if isDoubled && numberOfResultNumberDesimal < 1{
             modifiedResultText = String(format: "%0.0f", currentResultNumber)
         }
-        
         return modifiedResultText
     }
     
@@ -253,23 +286,5 @@ extension CalculatorPresenter {
         let expression = NSExpression(format: currentFormulaText)
         let result = expression.expressionValue(with: nil, context: nil) as! Double
         return result
-    }
-    
-    
-    private func resetAllFields() {
-        resetResultFields()
-        resetDecimalFields()
-    }
-    
-    private func resetResultFields() {
-        currentResultNumber = 0
-        currentFormulaText = ""
-        isStartedInputNumber = false
-    }
-    
-    private func resetDecimalFields() {
-        numberOfResultNumberDesimal = 0
-        isInputtedDecimal = false
-        isStartedInputNumber = false
     }
 }

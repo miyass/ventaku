@@ -107,7 +107,7 @@ extension CalculatorViewController {
         while functionalButtonCount <= 2 {
             let functionalButton = UIButton(type: .custom)
             if functionalButtonCount == 0 {
-                functionalButton.addTarget(self, action: #selector(tapDecimalButton), for: .touchUpInside)
+                functionalButton.addTarget(self, action: #selector(tapSwitchPlusOrMinusButton), for: .touchUpInside)
             } else if functionalButtonCount == 1 {
                 functionalButton.addTarget(self, action: #selector(tapStartRoundBrackets), for: .touchUpInside)
             } else if functionalButtonCount == 2 {
@@ -169,6 +169,10 @@ extension CalculatorViewController {
     
     @objc func tapEndRoundBrackets(_ sender: UIButton) {
         presenter.tapEndRoundBrackets(endRoundBrackets: sender.currentTitle)
+    }
+    
+    @objc func tapSwitchPlusOrMinusButton(_ sender: UIButton) {
+        presenter.tapSwitchPlusOrMinusButton()
     }
 }
 
@@ -261,8 +265,6 @@ extension CalculatorViewController {
         calculationResultTextField.textColor = UIColor.white
         calculationResultTextField.font = UIFont(name: "RobotoCondensed-Bold", size: 48)
         calculationResultTextField.adjustsFontSizeToFitWidth = true
-//        calculationResultTextField.backgroundColor = UIColor.red
-        
         //入力不可の方法。お気に入り機能からの遷移時には使えるようにする。
         calculationResultTextField.isEnabled = false
     }
@@ -282,7 +284,6 @@ extension CalculatorViewController {
         formulaTextLabel.textColor = UIColor.gray
         formulaTextLabel.font = UIFont(name: "RobotoCondensed-Bold", size: 24)
         formulaTextLabel.adjustsFontSizeToFitWidth = true
-//        formulaTextLabel.backgroundColor = UIColor.green
     }
     
     private func configureBackButtonPosition(backButton: UIButton, calculationResultArea: UIView) {
@@ -298,7 +299,6 @@ extension CalculatorViewController {
         backButton.setTitleColor(UIColor.white, for: .normal)
         backButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 40)
         backButton.contentVerticalAlignment = .center
-//        backButton.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
     }
     
     private func configureTopFunctionalButtonPosition(functionalButton: UIButton, functionalButtonCount: Int) {
