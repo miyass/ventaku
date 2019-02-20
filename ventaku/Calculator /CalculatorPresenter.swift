@@ -95,6 +95,12 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         if isRoundBracketsStarted { return }
         
         let expression = NSExpression(format: currentFormulaText)
+        let result1 = expression.expressionValue(with: nil, context: nil) as? Double
+        if result1 == nil {
+            return
+        }
+        
+        //今後クラッシュなどあれば、ラッピングで再検証
         let result = expression.expressionValue(with: nil, context: nil) as! Double
         
         numberOfResultNumberDesimal = 0
@@ -106,6 +112,7 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         if resultText.hasSuffix(".0") {
             resultText = String(resultText.prefix(resultText.characters.count - 2))
         }
+        currentResultNumber = Double(resultText)!
         currentFormulaText = " \(resultText)"
         
         isResulted = true

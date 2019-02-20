@@ -44,6 +44,7 @@ extension CalculatorViewController {
             let numberButton = UIButton(type: .custom)
             view.addSubview(numberButton)
             numberButton.addTarget(self, action: #selector(tapNumberButton), for: .touchUpInside)
+            numberButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             configureNumberDesignPosition(numberButton: numberButton, number: numberCount)
             configureEachNumberButtonDesign(numberButton: numberButton, number: numberCount)
             numberCount += 1
@@ -57,9 +58,11 @@ extension CalculatorViewController {
             view.addSubview(calculationButton)
             if calculateCount == 0 {
                 calculationButton.addTarget(self, action: #selector(tapResultButton), for: .touchUpInside)
+                calculationButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             } else {
                 calculationButton.tag = calculateCount
                 calculationButton.addTarget(self, action: #selector(tapCalculationButton), for: .touchUpInside)
+                calculationButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             }
             configureCalculationDesignPosition(calculationButton: calculationButton, calculateCount: calculateCount)
             configureEachCalculationButtonDesign(calculationButton: calculationButton, calculateCount: calculateCount)
@@ -96,6 +99,7 @@ extension CalculatorViewController {
     private func createBackButton(calculationResultArea: UIView) {
         let backButton = UIButton(type: .custom)
         backButton.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
         calculationResultArea.addSubview(backButton)
         configureBackButtonPosition(backButton: backButton, calculationResultArea: calculationResultArea)
         configureBackButtonDesign(backButton: backButton)
@@ -108,10 +112,13 @@ extension CalculatorViewController {
             let functionalButton = UIButton(type: .custom)
             if functionalButtonCount == 0 {
                 functionalButton.addTarget(self, action: #selector(tapSwitchPlusOrMinusButton), for: .touchUpInside)
+                functionalButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             } else if functionalButtonCount == 1 {
                 functionalButton.addTarget(self, action: #selector(tapStartRoundBrackets), for: .touchUpInside)
+                functionalButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             } else if functionalButtonCount == 2 {
                 functionalButton.addTarget(self, action: #selector(tapEndRoundBrackets), for: .touchUpInside)
+                functionalButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             }
             view.addSubview(functionalButton)
             configureTopFunctionalButtonPosition(functionalButton: functionalButton, functionalButtonCount: functionalButtonCount)
@@ -126,8 +133,10 @@ extension CalculatorViewController {
             let bottomFunctionalButton = UIButton(type: .custom)
             if bottomFunctionalButtonCount == 0 {
                 bottomFunctionalButton.addTarget(self, action: #selector(tapDecimalButton), for: .touchUpInside)
+                bottomFunctionalButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             } else if bottomFunctionalButtonCount == 1 {
                 bottomFunctionalButton.addTarget(self, action: #selector(tapClearButton), for: .touchUpInside)
+                bottomFunctionalButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
             }
             view.addSubview(bottomFunctionalButton)
             configureBottomFunctionalButtonPosition(bottomFunctionalButton: bottomFunctionalButton, bottomFunctionalButtonCount: bottomFunctionalButtonCount)
@@ -140,10 +149,14 @@ extension CalculatorViewController {
 
 extension CalculatorViewController {
     @objc func tapNumberButton(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        
         presenter.tapNumberButton(numberText: sender.currentTitle)
     }
     
     @objc func tapClearButton(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        
         presenter.tapClearButton()
     }
     
@@ -152,27 +165,43 @@ extension CalculatorViewController {
     }
     
     @objc func tapCalculationButton(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 26 / 252, green: 161 / 252, blue: 112 / 252, alpha: 252 / 252)
+        
         presenter.tapCalculationButton(calculationCount: sender.tag)
     }
     
     @objc func tapResultButton(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 26 / 252, green: 161 / 252, blue: 112 / 252, alpha: 252 / 252)
+        
         presenter.tapResultButton()
     }
     
     @objc func tapDecimalButton(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        
         presenter.tapDecimalButton(desimalText: sender.currentTitle)
     }
     
     @objc func tapStartRoundBrackets(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
+    
         presenter.tapStartRoundBrackets(startRoundBrackets: sender.currentTitle)
     }
     
     @objc func tapEndRoundBrackets(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
+        
         presenter.tapEndRoundBrackets(endRoundBrackets: sender.currentTitle)
     }
     
     @objc func tapSwitchPlusOrMinusButton(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.init(red: 90 / 252, green: 180 / 252, blue: 139 / 252, alpha: 252 / 252)
+        
         presenter.tapSwitchPlusOrMinusButton()
+    }
+    
+    @objc func tappingButtonForChangingColor(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.lightGray
     }
 }
 
@@ -336,7 +365,12 @@ extension CalculatorViewController {
         bottomFunctionalButton.setTitle(eraceSymbolImage[bottomFunctionalButtonCount], for: .normal)
         bottomFunctionalButton.setTitleColor(UIColor.black, for: .normal)
         bottomFunctionalButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 48)
-        bottomFunctionalButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        
+        if bottomFunctionalButtonCount == 0 {
+            bottomFunctionalButton.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        } else if bottomFunctionalButtonCount == 1 {
+            bottomFunctionalButton.backgroundColor = UIColor.init(red: 180 / 252, green: 94 / 252, blue: 90 / 252, alpha: 252 / 252)
+        }
         bottomFunctionalButton.layer.borderWidth = 2
         bottomFunctionalButton.layer.borderColor = UIColor.init(red: 81 / 252, green: 89 / 252, blue: 87 / 252, alpha: 252 / 252).cgColor
         
