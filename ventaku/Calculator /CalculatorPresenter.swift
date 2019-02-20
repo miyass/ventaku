@@ -23,6 +23,7 @@ protocol CalculatorPresenterInput {
 protocol CalculatorPresenterOutput: AnyObject {
     func updateCalculationResult(resultText: String)
     func updateFormula(formulaText: String)
+    func errorAlert()
 }
 
 final class CalculatorPresenter: CalculatorPresenterInput {
@@ -95,23 +96,21 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         if isRoundBracketsStarted { return }
         
         let expression = NSExpression(format: currentFormulaText)
-        let result1 = expression.expressionValue(with: nil, context: nil) as? Double
-        if result1 == nil {
-            return
+        var result = expression.expressionValue(with: nil, context: nil) as? Double
+        if result == nil {
+            self.view.errorAlert()
+            result = 0
         }
-        
-        //今後クラッシュなどあれば、ラッピングで再検証
-        let result = expression.expressionValue(with: nil, context: nil) as! Double
-        
         numberOfResultNumberDesimal = 0
         isInputtedDecimal = false
         isStartedInputNumber = false
         isRoundBracketsStarted = false
         
-        var resultText = String(result)
+        var resultText = String(result!)
         if resultText.hasSuffix(".0") {
             resultText = String(resultText.prefix(resultText.characters.count - 2))
         }
+        
         currentResultNumber = Double(resultText)!
         currentFormulaText = " \(resultText)"
         
@@ -220,6 +219,9 @@ final class CalculatorPresenter: CalculatorPresenterInput {
     
     func tapBackButton() {
         var splitFormulaTexts = currentFormulaText.components(separatedBy: " ")
+        if splitFormulaTexts.count <= 1 {
+            return
+        }
         let removeLastFormulaText = splitFormulaTexts[splitFormulaTexts.count - 1]
         let removeLastFormulaNumber = Float(removeLastFormulaText)
         

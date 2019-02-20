@@ -99,7 +99,6 @@ extension CalculatorViewController {
     private func createBackButton(calculationResultArea: UIView) {
         let backButton = UIButton(type: .custom)
         backButton.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
-        backButton.addTarget(self, action: #selector(tappingButtonForChangingColor), for: .touchDown)
         calculationResultArea.addSubview(backButton)
         configureBackButtonPosition(backButton: backButton, calculationResultArea: calculationResultArea)
         configureBackButtonDesign(backButton: backButton)
@@ -214,6 +213,13 @@ extension CalculatorViewController: CalculatorPresenterOutput {
     func updateFormula(formulaText: String) {
         formulaTextLabel.text! = formulaText
     }
+    
+    func errorAlert() {
+        let alert: UIAlertController = UIAlertController(title: "エラー", message: "無効な計算式が入力されている可能性があります。一度計算式をリセットします", preferredStyle:  .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 
