@@ -323,16 +323,16 @@ extension CalculatorViewController {
     
     private func configureBackButtonPosition(backButton: UIButton, calculationResultArea: UIView) {
         backButton.snp.makeConstraints { (make) in
-            make.width.equalTo(view.bounds.width / 8)
+            make.width.equalTo(view.bounds.width / 12)
             make.height.equalTo(view.bounds.width / 4)
-            make.right.equalTo(calculationResultArea)
+            make.right.equalTo(calculationResultArea).offset(-10)
         }
     }
     
     private func configureBackButtonDesign(backButton: UIButton) {
-        backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(UIColor.white, for: .normal)
-        backButton.titleLabel!.font = UIFont.init(name: "RobotoCondensed-Bold", size: 40)
+        let backButtonImage = UIImage(named: "backspace")
+        backButton.setImage(backButtonImage, for: .normal)
+        backButton.imageView?.contentMode = .scaleAspectFit
         backButton.contentVerticalAlignment = .center
     }
     
