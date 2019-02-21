@@ -154,7 +154,7 @@ extension CalculatorViewController {
     }
     
     @objc func tapClearButton(_ sender: UIButton) {
-        sender.backgroundColor = UIColor.init(red: 245 / 252, green: 245 / 252, blue: 245 / 252, alpha: 252 / 252)
+        sender.backgroundColor = UIColor.init(red: 180 / 252, green: 94 / 252, blue: 90 / 252, alpha: 252 / 252)
         
         presenter.tapClearButton()
     }

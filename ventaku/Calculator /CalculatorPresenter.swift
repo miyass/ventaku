@@ -95,6 +95,18 @@ final class CalculatorPresenter: CalculatorPresenterInput {
         if !isStartedInputNumber { return }
         if isRoundBracketsStarted { return }
         
+        //申請後見直す
+        let splitFormulaTexts = currentFormulaText.components(separatedBy: " ")
+        currentFormulaText = ""
+        for splitFormulaText  in splitFormulaTexts {
+            let eachFormulaText = Int(splitFormulaText)
+            if eachFormulaText != nil {
+                currentFormulaText += " \(splitFormulaText).0"
+            } else {
+                currentFormulaText += " \(splitFormulaText)"
+            }
+        }
+        
         let expression = NSExpression(format: currentFormulaText)
         var result = expression.expressionValue(with: nil, context: nil) as? Double
         if result == nil {
